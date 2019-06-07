@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cipher1\Cipher1.csproj" />
+    <ProjectReference Include="..\Cipher2\Cipher2.csproj" />
+  </ItemGroup>
+
+</Project>

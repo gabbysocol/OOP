@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.Remoting;
-using System.Threading;
+
 
 //private string _name;
 //public string Name
@@ -25,12 +20,11 @@ namespace oopCreateObject
     };
 
     [DisplayName("BioSystem")]
-    //[Serializable]
+    [Serializable]
     public class BiologicalSystem
     {
         public string NameOwner { get; set; }
         public Lesion Lesion { get; set; }
-        public int QualityofSystems { get; set; }
         public int Days { get; set; }
 
         public BiologicalSystem()
@@ -52,11 +46,11 @@ namespace oopCreateObject
     }
 
     [DisplayName("Gastrointestinal System")]
-    //[Serializable]
+    [Serializable]
     public class GastrointestinalSystem : BiologicalSystem
     {
-        public float Pepsin { get; set; }
-        public float Gelatin { get; set; }
+        public int Pepsin { get; set; }
+        public int Gelatin { get; set; }
 
         public GastrointestinalSystem()
         {
@@ -67,65 +61,73 @@ namespace oopCreateObject
 
     // печень
     [DisplayName("Liver")]
-    //[Serializable]
+    [Serializable]
     public class Liver : GastrointestinalSystem
     {
-        public float Fats { get; set; }
-        public float Proteins { get; set; }
-        public float Carbohydrates { get; set; }
+        public int Fats { get; set; }
+        public int Proteins { get; set; }
+        public int Carbohydr { get; set; }
 
         public Liver()
         {
             Fats = 55;
             Proteins = 111;
-            Carbohydrates = 12;
+            Carbohydr = 12;
         }
+
+        //public override string ToString()
+        //{
+        //    return NameOwner.ToString();
+        //}
     }
 
     [DisplayName("Respiratory System")]
-    //[Serializable]
+    [Serializable]
     public class RespiratorySystem : BiologicalSystem
     {
         public bool PassiveResp { get; set; }
         
         public RespiratorySystem()
         {
-            PassiveResp = false;
         }
     }
 
     [DisplayName("Nose")]
-    //[Serializable]
+    [Serializable]
     public class Nose : RespiratorySystem
     {
         public int Pause { get; set; }
-        public bool CleaningAir { get; set; }
+        public string Quality { get; set; }
 
         public Nose()
         {
             Pause = 12;
-            CleaningAir = true;
+            Quality = "very";
         }
+
+        //public override string ToString()
+        //{
+        //    return NameOwner.ToString();
+        //}
     }
 
     [DisplayName("Lungs")]
-    //[Serializable]
+    [Serializable]
     public class Lungs : RespiratorySystem
     {
         public bool Breath { get; set; }
-        public bool Inhale { get; set; }
+        public int Inhale { get; set; }
         [Description("Aggregation")]
         public Nose Nose { get; set; }
 
         public Lungs()
         {
-            Breath = true;
-            Inhale = true;
+            Inhale = 0;
         }
     }
 
     [DisplayName("Immune System")]
-    ///[Serializable]
+    [Serializable]
     public class ImmuneSystem : BiologicalSystem
     {
         public int CapasityLimfa { get; set; }
@@ -138,7 +140,7 @@ namespace oopCreateObject
 
     //селезенка
     [DisplayName("Spleen")]
-    //[Serializable]
+    [Serializable]
     public class Spleen : ImmuneSystem
     {
         public int CapasityBlood { get; set; }
@@ -147,41 +149,48 @@ namespace oopCreateObject
         public Spleen()
         {
             CapasityBlood = 5000;
-            BloodFiltration = true;
+        }
+
+        public override string ToString()
+        {
+            return NameOwner.ToString();
         }
     }
 
     [DisplayName("Central Nervous System")]
-    //[Serializable]
+    [Serializable]
     public class CentralNervousSystem : BiologicalSystem
     {
         public bool Passive { get; set; }
 
         public CentralNervousSystem()
         {
-            Passive = false;
         }
     }
 
     [DisplayName("Brains")]
-    //[Serializable]
+    [Serializable]
     public class Brains : CentralNervousSystem
     {
         //public int CapasityBlood { get; set; }
         public string Sensitivity { get; set; }
         public bool SpeechFunction { get; set; }
-        [Description("Composition")]
-        public Bonebrains BoneBrains { get; set; }
+        [Description("Aggregation")]
+        public Bonebrains Bonebrains { get; set; }
 
         public Brains()
         {
-            Sensitivity = " ";
-            SpeechFunction = true;
+            Sensitivity = "high";
+        }
+
+        public override string ToString()
+        {
+            return NameOwner.ToString();
         }
     }
 
     [DisplayName("Bloodcirculation System")]
-    //[Serializable]
+    [Serializable]
     public class BloodCirculationSystem : BiologicalSystem
     {
         public int Blood { get; set; }
@@ -195,20 +204,21 @@ namespace oopCreateObject
     }
 
     [DisplayName("Bonebrains")]
-    //[Serializable]
+    [Serializable]
     public class Bonebrains : BloodCirculationSystem
     {
-        public bool Active { get; set; }
+        public int Active { get; set; }
         public bool ReflexFunction { get; set; }
 
         public Bonebrains()
         {
-            SpeechFunction = true;
+            Active = 1;
+            ReflexFunction = false;
         }
     }
 
     [DisplayName("Heart")]
-    //[Serializable]
+    [Serializable]
     public class Heart : BloodCirculationSystem
     {
         public int PressureHigh { get; set; }
@@ -221,9 +231,14 @@ namespace oopCreateObject
         {
             PressureHigh = 120;
             PressureLow = 80;
-            Sistle = 0;
-            Diastle = 10;
+            Sistle = 10;
+            Diastle = 20;
             HeartCycle = 0.5;
+        }
+
+        public override string ToString()
+        {
+            return NameOwner.ToString();
         }
     }
 }

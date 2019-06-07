@@ -34,6 +34,10 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.listViewObjects = new System.Windows.Forms.ListView();
+            this.comboBoxChooseSerializer = new System.Windows.Forms.ComboBox();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonLoad = new System.Windows.Forms.Button();
+            this.comboBoxPlugin = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -87,6 +91,46 @@
             this.listViewObjects.TabIndex = 4;
             this.listViewObjects.UseCompatibleStateImageBehavior = false;
             // 
+            // comboBoxChooseSerializer
+            // 
+            this.comboBoxChooseSerializer.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.comboBoxChooseSerializer.FormattingEnabled = true;
+            this.comboBoxChooseSerializer.Location = new System.Drawing.Point(12, 186);
+            this.comboBoxChooseSerializer.MaxDropDownItems = 7;
+            this.comboBoxChooseSerializer.Name = "comboBoxChooseSerializer";
+            this.comboBoxChooseSerializer.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxChooseSerializer.TabIndex = 5;
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(12, 213);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(56, 43);
+            this.buttonSave.TabIndex = 6;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonLoad
+            // 
+            this.buttonLoad.Location = new System.Drawing.Point(77, 213);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(56, 43);
+            this.buttonLoad.TabIndex = 7;
+            this.buttonLoad.Text = "Load";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
+            // 
+            // comboBoxPlugin
+            // 
+            this.comboBoxPlugin.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.comboBoxPlugin.FormattingEnabled = true;
+            this.comboBoxPlugin.Location = new System.Drawing.Point(12, 262);
+            this.comboBoxPlugin.MaxDropDownItems = 7;
+            this.comboBoxPlugin.Name = "comboBoxPlugin";
+            this.comboBoxPlugin.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxPlugin.TabIndex = 8;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +138,10 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(635, 295);
+            this.Controls.Add(this.comboBoxPlugin);
+            this.Controls.Add(this.buttonLoad);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.comboBoxChooseSerializer);
             this.Controls.Add(this.listViewObjects);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -114,6 +162,10 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ListView listViewObjects;
+        private System.Windows.Forms.ComboBox comboBoxChooseSerializer;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonLoad;
+        private System.Windows.Forms.ComboBox comboBoxPlugin;
     }
 }
 

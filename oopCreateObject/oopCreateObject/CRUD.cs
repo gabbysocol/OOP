@@ -16,41 +16,6 @@ namespace oopCreateObject
     public class CRUD: IFORCRUD
     {
         private readonly Color blue;
-
-        public void ElementDelete(Object item, List<Object> items)
-        {
-            //objects with other object
-            var ownerList = items.Where(itm => (itm.GetType()
-            .GetProperties()
-            .Where(fld => ((fld.PropertyType == item.GetType() || fld.PropertyType.BaseType == item.GetType())))).ToList().Count > 0).ToList();
-
-            foreach (var owner in ownerList)
-            {
-                foreach (var fld in owner.GetType().GetProperties().Where(fld => (fld.PropertyType == item.GetType())).ToList())
-                {
-                    if ((fld.GetValue(owner) != null) && (fld.GetValue(owner).Equals(item)))
-                    {
-                        fld.SetValue(owner, null);
-                    }
-                }
-            }
-            items.Remove(item);
-        }
-
-        private void TrySetValue(PropertyInfo propertyInfo, object item, object value)
-        {
-            var buf = propertyInfo.GetValue(item);
-            try
-            {
-                propertyInfo.SetValue(item, Convert.ChangeType(value, propertyInfo.PropertyType));
-            }
-            catch
-            {
-                propertyInfo.SetValue(item, buf);
-                MessageBox.Show(propertyInfo.Name + ": Incorrect field value");
-            }
-        }
-
         public Form CreateForm(Object element, List<Object> elements, bool flag)
         {
             const int formWidth = 400;
@@ -72,7 +37,7 @@ namespace oopCreateObject
             {
                 Label label = new Label
                 {
-                    Text = string.Concat(" ", fields[i].PropertyType.Name, " "),
+                    Text = string.Concat(fields[i].PropertyType.Name, " ", fields[i].Name), //string.Concat(" ", fields[i], " "),
                     Width = width,
                     Height = height,
                     TextAlign = ContentAlignment.MiddleCenter,
@@ -116,8 +81,7 @@ namespace oopCreateObject
                 {
                     ComboBox combobox = CreateComboBox(fields[i].Name,
                                                         new Point(15 + label.Width, height * (i + 1)),
-                                                        width,
-                                                        fields[i].PropertyType.GetEnumNames(),
+                                                        width, fields[i].PropertyType.GetEnumNames(),
                                                         (int)(fields[i].GetValue(element)));
                     form.Controls.Add(combobox);
 
@@ -126,8 +90,7 @@ namespace oopCreateObject
                 else if ((fields[i].PropertyType.IsClass))
                 {
                     ComboBox combobox = CreateComboBox(fields[i].Name, new Point(15 + label.Width, height * (i + 1)),
-                                                       width,
-                                                       fields[i].PropertyType, fields[i].GetValue(element),elements);
+                                                       width, fields[i].PropertyType, fields[i].GetValue(element),elements);
                     form.Controls.Add(combobox);
                 }
             };
@@ -258,6 +221,39 @@ namespace oopCreateObject
             }
             combobox.SelectedIndex = index;
             return combobox;
+        }
+
+        public void ElementDelete(Object item, List<Object> items)
+        {
+            //objects with other object
+            var ownerList = items.Where(itm => (itm.GetType()
+            .GetProperties().Where(fld => ((fld.PropertyType == item.GetType() || fld.PropertyType.BaseType == item.GetType())))).ToList().Count > 0).ToList();
+
+            foreach (var owner in ownerList)
+            {
+                foreach (var fld in owner.GetType().GetProperties().Where(fld => (fld.PropertyType == item.GetType())).ToList())
+                {
+                    if ((fld.GetValue(owner) != null) && (fld.GetValue(owner).Equals(item)))
+                    {
+                        fld.SetValue(owner, null);
+                    }
+                }
+            }
+            items.Remove(item);
+        }
+
+        private void TrySetValue(PropertyInfo propertyInfo, object item, object value)
+        {
+            var buf = propertyInfo.GetValue(item);
+            try
+            {
+                propertyInfo.SetValue(item, Convert.ChangeType(value, propertyInfo.PropertyType));
+            }
+            catch
+            {
+                propertyInfo.SetValue(item, buf);
+                MessageBox.Show(propertyInfo.Name + " !Incorrect value!");
+            }
         }
     }
 }
